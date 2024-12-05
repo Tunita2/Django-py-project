@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Trang Chủ{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="display-4 mb-4">Chào Mừng Đến Trang Của Chúng Tôi</h1>
+            
+            {% if user.is_authenticated %}
+                <div class="alert alert-success">
+                    <h2>Xin chào, {{ user.username }}!</h2>
+                    <p>Bạn đã đăng nhập thành công.</p>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <p>Vui lòng đăng nhập để truy cập đầy đủ các tính năng.</p>
+                </div>
+            {% endif %}
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Về Chúng Tôi</h5>
+                            <p class="card-text">Chúng tôi cung cấp các dịch vụ và giải pháp tiên tiến.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Dịch Vụ</h5>
+                            <p class="card-text">Khám phá các tính năng và dịch vụ của chúng tôi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if not user.is_authenticated %}
+                <div class="mt-4">
+                    <a href="{% url 'login' %}" class="btn btn-primary me-2">Đăng Nhập</a>
+                    <a href="{% url 'register' %}" class="btn btn-success">Đăng Ký</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Một số script tùy chọn cho trang chủ
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Trang chủ đã được tải');
+    });
+</script>
+{% endblock %}

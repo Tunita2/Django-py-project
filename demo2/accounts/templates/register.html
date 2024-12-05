@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}Đăng Ký{% endblock %}
+
+{% block extra_css %}
+<style>
+    .register-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .register-header {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #343a40;
+    }
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="register-container">
+        <h2 class="register-header">Đăng Ký Tài Khoản</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_username" class="form-label">Tên Đăng Nhập</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="text-danger">
+                            {{ form.username.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="id_email" class="form-label">Email</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="text-danger">
+                            {{ form.email.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="id_password1" class="form-label">Mật Khẩu</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <div class="text-danger">
+                            {{ form.password1.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="id_password2" class="form-label">Xác Nhận Mật Khẩu</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <div class="text-danger">
+                            {{ form.password2.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2 mb-3">
+                <button type="submit" class="btn btn-success">
+                    Đăng Ký
+                </button>
+            </div>
+            
+            <div class="text-center">
+                <p>Đã có tài khoản? 
+                    <a href="{% url 'login' %}" class="text-primary">Đăng nhập</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Tự động thêm class Bootstrap cho các form field
+    document.addEventListener('DOMContentLoaded', function() {
+        const formControls = document.querySelectorAll('input');
+        formControls.forEach(control => {
+            control.classList.add('form-control');
+        });
+    });
+</script>
+{% endblock %}
